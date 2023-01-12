@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug TS Server",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/api/node_modules/ts-node/dist/bin.js",
+            "args": ["-r", "tsconfig-paths/register", "${workspaceFolder}/api/src/index.ts"],
+            "cwd": "${workspaceFolder}/api",
+            "protocol": "inspector",
+            "console": "integratedTerminal"
+        },
+    ]
+}

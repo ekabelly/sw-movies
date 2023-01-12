@@ -1,7 +1,8 @@
 // Import necessary modules
-import express from 'express';
+import express, { response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import starshipsRouter from './starships/starships.controller';
 
 // Create an instance of express
 const app = express();
@@ -16,6 +17,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Define a route
 app.get('/', (req, res) => {
     res.send({ message: 'Hello, World!' });
+});
+
+
+app.use('/api/v1/starships', starshipsRouter);
+
+app.use((error, req, res, next) => {
+    console.error(error);
+    res.status(error?.response?.status || error?.status || 500).send(error?.message || 'Unknown error');
 });
 
 // Start the server
