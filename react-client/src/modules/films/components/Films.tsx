@@ -1,3 +1,4 @@
+import { ConfigProvider, theme } from 'antd';
 import React, { useState } from 'react';
 import { getFilm, searchFilms } from '../services/films.service';
 import FilmCharactersTable from './FilmCharactersTable';
@@ -27,17 +28,24 @@ const Films: React.FC = () => {
         }
     }
 
-    return (<div className='films'>
-        <div className="search-bar">
-            <Searchbar searchPlaceholderText='Insert Film name' searchClick={searchClick} isLoading={isSearchLoading}></Searchbar>
-        </div>
-        <div className="films-section">
-            <div className="films-info">
-                <FilmsList films={films} setSelectedFilms={getSelectedFilm} selectedFilmId={selectedfilm.id} />
+    return (
+        <ConfigProvider
+            theme={{
+                algorithm: theme.darkAlgorithm,
+            }}
+        >
+            <div className='films'>
+                <div className="search-bar">
+                    <Searchbar searchPlaceholderText='Insert Film name' searchClick={searchClick} isLoading={isSearchLoading}></Searchbar>
+                </div>
+                <div className="films-section">
+                    <div className="films-info">
+                        <FilmsList films={films} setSelectedFilms={getSelectedFilm} selectedFilmId={selectedfilm.id} />
+                    </div>
+                    <FilmCharactersTable data={selectedfilm.characters} isFetching={isSelectedFilmLoading} />
+                </div>
             </div>
-            <FilmCharactersTable data={selectedfilm.characters} isFetching={isSelectedFilmLoading} />
-        </div>
-    </div>
+        </ConfigProvider>
     );
 }
 
