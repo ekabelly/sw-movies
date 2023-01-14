@@ -20,7 +20,7 @@ COPY . .
 RUN npm run build
 
 # Expose the port for the API to listen on
-EXPOSE 3000
+EXPOSE 5000
 
 # Start the API
 CMD ["npm", "start"]

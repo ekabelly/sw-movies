@@ -2,7 +2,7 @@
 import express, { response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import starshipsRouter from './starships/starships.controller';
+import filmsRouter from './films/films.controller';
 
 // Create an instance of express
 const app = express();
@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.use('/api/v1/starships', starshipsRouter);
+app.use('/api/v1/films', filmsRouter);
 
 app.use((error, req, res, next) => {
     console.error(error);
@@ -28,7 +28,7 @@ app.use((error, req, res, next) => {
 });
 
 // Start the server
-const port = 3000;
+const port = 5000;
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
