@@ -1,8 +1,11 @@
 @import '../../../assets/base.scss';
 
-.films-info {
+.films-list {
     width: 300px;
-    .film:hover {
+    flex-shrink: 0;
+
+    .film:hover,
+    .selected {
         background-color: lighten($app-background-color, 10);
     }
 }

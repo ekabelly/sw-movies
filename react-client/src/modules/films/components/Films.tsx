@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getFilm, searchFilms } from '../services/films.service';
 import FilmCharactersTable from './FilmCharactersTable';
-import FilmsInfo from './FilmInfo';
+import FilmsList from './FilmList';
 import './Films.scss';
 import Searchbar from './Searchbar';
 
@@ -9,7 +9,7 @@ const Films: React.FC = () => {
 
     const [isSearchLoading, setIsSearchLoading] = useState(false)
     const [films, setFilms] = useState([])
-    const [selectedfilm, setSelectedFilm] = useState({ characters: [] });
+    const [selectedfilm, setSelectedFilm] = useState({ characters: [], id: '' });
     const [isSelectedFilmLoading, setIsSelectedFilmLoading] = useState(false)
 
     const searchClick = async (searchTerm: string) => {
@@ -20,9 +20,10 @@ const Films: React.FC = () => {
 
     const getSelectedFilm = async (filmdId: string) => {
         if (!isSelectedFilmLoading) {
+            setSelectedFilm({ characters: [], id: filmdId });
             setIsSelectedFilmLoading(true);
-            const foundFilms = await getFilm(filmdId).finally(() => setIsSelectedFilmLoading(false));
-            setSelectedFilm(foundFilms);
+            const foundFilm = await getFilm(filmdId).finally(() => setIsSelectedFilmLoading(false));
+            setSelectedFilm({ ...foundFilm, id: filmdId });
         }
     }
 
@@ -32,7 +33,7 @@ const Films: React.FC = () => {
         </div>
         <div className="films-section">
             <div className="films-info">
-                <FilmsInfo films={films} setSelectedFilms={getSelectedFilm} />
+                <FilmsList films={films} setSelectedFilms={getSelectedFilm} selectedFilmId={selectedfilm.id} />
             </div>
             <FilmCharactersTable data={selectedfilm.characters} isFetching={isSelectedFilmLoading} />
         </div>
