@@ -1,0 +1,8 @@
+@import '../../../assets/base.scss';
+
+.films-info {
+    width: 300px;
+    .film:hover {
+        background-color: lighten($app-background-color, 10);
+    }
+}

@@ -8,6 +8,16 @@ interface FilmsResponse {
     results: Film[];
 }
 
+const getFilmId = url => {
+    try {
+        const t = url.split('/').filter(value => !!value);
+        return t[t.length - 1];
+    } catch (e) {
+        console.error(e);
+        return null;
+    }
+}
+
 const swApiResHandler = (result: AxiosResponse): AxiosResponse['data'] => {
     if (!result?.data) {
         throw { message: 'Unknown error', status: 500 };
@@ -21,7 +31,10 @@ export const getFilms = async (page = 1, search = null): Promise<Film[]> => {
         if (!data.results) {
             throw { message: 'Unknown error', status: 500 };
         }
-        return data.results;
+        return data.results.map(film => ({
+            ...film,
+            id: getFilmId(film.url),
+        }));
     });
 }
 

@@ -1,5 +1,18 @@
 .films {
+    flex-direction: column;
+
+    &,
+    .films-section {
+        display: flex;
+        overflow: hidden;
+        flex: 1;
+    }
+
     .search-bar {
         width: 400px;
+    }
+
+    .films-info {
+        margin: 20px 0;
     }
 }

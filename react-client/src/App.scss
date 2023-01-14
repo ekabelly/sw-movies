@@ -1,12 +1,18 @@
 @import './assets//base.scss';
 
 .app {
-  height: 100vh;
   background-color: $app-background-color;
   overflow: hidden;
   color: white;
   font-size: 16px;
   font-family: cursive;
+  flex-direction: column;
+}
+
+.app, main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
 }
 
 main {

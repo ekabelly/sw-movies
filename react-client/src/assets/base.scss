@@ -1,1 +1,10 @@
 $app-background-color: #282c34;
+
+.pointer {
+    cursor: pointer;
+}
+
+#root {
+    display: flex;
+    height: 100vh;
+}
